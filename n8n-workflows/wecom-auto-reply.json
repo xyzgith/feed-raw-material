@@ -1,0 +1,98 @@
+{
+  "name": "企业微信消息接收",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wecom-receive",
+        "options": {}
+      },
+      "id": "webhook-receive",
+      "name": "Webhook - 接收企业微信消息",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 提取用户ID和消息内容\nconst userId = $input.first().json.FromUserName;\nconst message = $input.first().json.Content;\n\nreturn [\n  {\n    json: {\n      userId: userId,\n      message: message\n    }\n  }\n];"
+      },
+      "id": "extract-msg",
+      "name": "提取消息内容",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 关键词匹配自动回复\nconst message = $input.first().json.message;\nconst userId = $input.first().json.userId;\n\nlet reply = \"\";\n\nif (message.includes(\"玉米价格\")) {\n  reply = \"感谢咨询玉米价格！今日玉米（吉林长春）价格：2.45元/斤，库存500吨。如需报价单，请留下您的邮箱或微信号。\";\n} else if (message.includes(\"小麦价格\")) {\n  reply = \"感谢咨询小麦价格！今日小麦（河南郑州）价格：2.38元/斤，库存300吨。如需报价单，请留下您的邮箱或微信号。\";\n} else if (message.includes(\"面粉价格\")) {\n  reply = \"感谢咨询面粉价格！今日面粉（山东济南）价格：2.65元/斤，库存150吨。如需报价单，请留下您的邮箱或微信号。\";\n} else if (message.includes(\"联系方式\")) {\n  reply = \"我们的联系方式：电话：138-0000-0000，邮箱：your-email@example.com，工作时间：周一至周五 9:00-18:00\";\n} else if (message.includes(\"公司地址\")) {\n  reply = \"我们公司地址：中国某省某市某区某路123号。欢迎实地考察！\";\n} else if (message.includes(\"人工客服\")) {\n  reply = \"已为您转接人工客服，请稍等...\";\n} else {\n  reply = \"感谢您的留言！我们会尽快回复您。\\n如需紧急咨询，请致电：138-0000-0000\\n或发送邮件至：your-email@example.com\";\n}\n\nreturn [\n  {\n    json: {\n      userId: userId,\n      reply: reply\n    }\n  }\n];"
+      },
+      "id": "auto-reply",
+      "name": "自动回复匹配",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={{$env.WECOM_ACCESS_TOKEN}}",
+        "jsonParameters": true,
+        "specifyBody": "json",
+        "bodyParametersJson": "={\n  \"touser\": \"={{$json.userId}}\",\n  \"msgtype\": \"text\",\n  \"agentid\": {{$env.WECOM_AGENT_ID}},\n  \"text\": {\n    \"content\": \"={{$json.reply}}\"\n  }\n}"
+      },
+      "id": "send-reply",
+      "name": "发送回复消息",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook - 接收企业微信消息": {
+      "main": [
+        [
+          {
+            "node": "提取消息内容",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提取消息内容": {
+      "main": [
+        [
+          {
+            "node": "自动回复匹配",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "自动回复匹配": {
+      "main": [
+        [
+          {
+            "node": "发送回复消息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
