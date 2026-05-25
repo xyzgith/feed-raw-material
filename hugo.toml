@@ -1,0 +1,24 @@
+# Hugo 配置文件
+baseURL = "https://yourusername.github.io/feed-raw-material/"
+languageCode = "zh-cn"
+title = "优质饲料原料供应商 - 玉米、小麦、面粉"
+theme = "ananke"
+
+[params]
+  description = "专业供应优质玉米、小麦、面粉等饲料原料，长期稳定供货，价格优惠"
+  author = "饲料原料供应商"
+  author_email = "your-email@example.com"
+
+[params.header]
+  _merge = "shallow"
+  navbar_background = "white"
+  navbar_dark = false
+  navbar_fixed = true
+
+[params.sidebar]
+  _merge = "shallow"
+  show_toc = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
