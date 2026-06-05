@@ -5,6 +5,8 @@ draft: false
 ---
 
 # 关于我们
+![Feed raw material factory warehouse](/images/factory.jpg)
+
 
 ## 公司简介
 
@@ -13,6 +15,8 @@ draft: false
 ## 核心优势
 
 ### [Factory] 优质货源
+![Feed raw material factory warehouse](/images/factory.jpg)
+
 - 与东北、华北等主要产区建立直采合作
 - 严格质量控制体系，每批货物附检测报告
 - 年供应量超过10万吨，保障长期稳定供货
@@ -28,6 +32,8 @@ draft: false
 - 24小时内发货，及时送达
 
 ### [Handshake] 诚信经营
+![Business team working together](/images/team.jpg)
+
 - 与上市饲料企业深度合作
 - 支持月结、季结等灵活结算方式
 - 客户满意度98%以上
