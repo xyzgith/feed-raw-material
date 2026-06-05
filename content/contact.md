@@ -5,6 +5,8 @@ draft: false
 ---
 
 # 联系我们
+![Office contact](/images/contact.jpg)
+
 
 ## 联系方式
 
