@@ -7,6 +7,8 @@ draft: false
 # 产品中心
 
 ## [Corn] 优质玉米
+![Fresh corn grains harvest](/images/corn-product.jpg)
+
 
 ### 产品规格
 - **产地**：吉林长春、黑龙江哈尔滨、辽宁沈阳
@@ -35,6 +37,8 @@ draft: false
 ---
 
 ## [Wheat] 精选小麦
+![Golden wheat grains](/images/wheat-product.jpg)
+
 
 ### 产品规格
 - **产地**：河南郑州、山东济南、河北石家庄
@@ -62,6 +66,8 @@ draft: false
 ---
 
 ## [Rice] 优质面粉
+![Fine flour product](/images/flour-product.jpg)
+
 
 ### 产品规格
 - **类型**：饲料专用面粉
