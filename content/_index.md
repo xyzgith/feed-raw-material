@@ -1,4 +1,6 @@
 ---
+![Banner showing corn and wheat grains](/images/corn-header.jpg)
+
 title: "优质饲料原料供应商 - 玉米、小麦、面粉"
 date: 2026-05-25T10:00:00+08:00
 draft: false
